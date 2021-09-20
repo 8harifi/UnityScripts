@@ -12,6 +12,7 @@ public class SimplePlayerMovement : MonoBehaviour
     private bool Grounded;
     private int RemainedJumps = 3;
     const float GroundedRadius = .05f;
+    private float VelocityY;
 
     public float MovementSpeed = 10f;
     public float JumpForce = 1000f;
@@ -60,13 +61,13 @@ public class SimplePlayerMovement : MonoBehaviour
             // if the character is grounded then no need to check anything else, just jump
             if (Grounded)
             {
-                Rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+                Rigidbody2D.AddForce(new Vector2(0f, JumpForce + (VelocityY * -100)));
             }
             // otherwise (not grounded) then check if character has more than 0 remained jumps, and also decrease the value of RemainedJumps
             else if (RemainedJumps > 0)
             {
                 RemainedJumps -= 1;
-                Rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+                Rigidbody2D.AddForce(new Vector2(0f, JumpForce + (VelocityY * -100)));
             }
 
         }
